@@ -1,7 +1,7 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.1",
   "name": "grunt-nightwatch",
-  "description": "Run your Nightwatch.js tests",
+  "description": "Run your Nightwatch.js tests with Grunt",
   "repository": {
     "type": "git",
     "url": "https://github.com/pateketrueke/grunt-nightwatch.git"
