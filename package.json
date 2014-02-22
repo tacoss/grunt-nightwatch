@@ -20,12 +20,11 @@
     "email": "pateketrueke@gmail.com"
   },
   "license": "MIT",
-  "peerDependencies": {
-    "nightwatch": ">=0.3.5"
+  "dependencies": {
+    "nightwatch": "~0.3.5"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "nightwatch": "~0.3.5",
     "grunt-contrib-watch": "~0.5.3"
   }
 }
