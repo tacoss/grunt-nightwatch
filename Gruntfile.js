@@ -9,9 +9,13 @@ module.exports = function(grunt) {
     },
     nightwatch: {
       options: {
-        standalone: true,
         local: {
+          standalone: true,
           jar_path: '/opt/selenium/server.jar'
+        },
+        ci: {
+          selenium_host: [process.env['SAUCE_USERNAME'], ':', process.env['SAUCE_ACCESS_KEY'], '@localhost'].join(''),
+          selenium_port: 4445
         }
       }
     }
