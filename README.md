@@ -13,7 +13,9 @@ Configure your tasks:
 ```javascript
 module.exports = function(grunt) {
   grunt.initConfig({
-    nightwatch: { /* see below */ }
+    nightwatch: {
+      options: { /* see below */ }
+    }
   });
 
   grunt.loadNpmTasks('grunt-nightwatch');
@@ -71,7 +73,9 @@ All options are the same as the main settings.
 
 ```javascript
 nightwatch: {
-  demo: { /* settings */ }
+  options: {
+    demo: { /* settings */ }
+  }
 }
 ```
 
