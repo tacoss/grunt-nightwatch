@@ -75,7 +75,7 @@ nightwatch: {
 
 Note that all options are the same as the main settings.
 
-Now you can execute `grunt nightwatch:other` yo run your tests.
+Now you can execute `grunt nightwatch:other` to run your tests.
 
 ## Build status
 
