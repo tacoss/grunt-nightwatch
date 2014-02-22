@@ -1,0 +1,31 @@
+{
+  "version": "0.1.0",
+  "name": "grunt-nightwatch",
+  "description": "Run your Nightwatch.js tests",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pateketrueke/grunt-nightwatch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pateketrueke/grunt-nightwatch/issues"
+  },
+  "keywords": [
+    "ci",
+    "browser",
+    "testing",
+    "nightwatch"
+  ],
+  "author": {
+    "name": "Alvaro Cabrera",
+    "email": "pateketrueke@gmail.com"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "nightwatch": ">=0.3.5"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "nightwatch": "~0.3.5",
+    "grunt-contrib-watch": "~0.5.3"
+  }
+}
