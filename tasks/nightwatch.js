@@ -91,6 +91,7 @@ module.exports = function(grunt) {
 
         selenium.startServer(settings, settings.test_settings, function(error, child, error_out, exitcode) {
           if (error) {
+            grunt.log.writeln('FAIL');
             grunt.log.error('There was an error while starting the Selenium server:');
             grunt.log.writeln(error_out);
             process.exit(exitcode);
@@ -98,6 +99,7 @@ module.exports = function(grunt) {
 
           runner.run(settings.src_folders, settings.test_settings, config, function(err) {
             if (err) {
+              grunt.log.writeln('FAIL');
               grunt.log.error('There was an error while running the test.');
             }
             selenium.stopServer();
