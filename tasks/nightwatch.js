@@ -74,7 +74,7 @@ module.exports = function(grunt) {
         return defaults;
       }
 
-      // https://github.com/beatfactor/nightwatch/blob/master/runner/run.js
+      // https://github.com/beatfactor/nightwatch/blob/master/bin/runner.js
       var nw_dir = path.dirname(__dirname) + '/node_modules/nightwatch',
           runner = require(nw_dir + '/runner/run.js'),
           settings = expandSettings(params);
