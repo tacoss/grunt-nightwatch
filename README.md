@@ -22,6 +22,8 @@ module.exports = function(grunt) {
 
 Write some tests:
 
+**tests/default/google-test.js**
+
 ```javascript
 module.exports = {
   'Demo test Google': function(browser) {
@@ -65,7 +67,7 @@ If enabled, there are two scenarios:
 
 ## Targets
 
-Setup and run an specific target:
+All options are the same as the main settings.
 
 ```javascript
 nightwatch: {
@@ -73,9 +75,9 @@ nightwatch: {
 }
 ```
 
-Note that all options are the same as the main settings.
-
 Now you can execute `grunt nightwatch:other` to run your tests.
+
+Note that your tests must be grouped together as follows: `tests/<group>/test.js`
 
 ## Build status
 
