@@ -59,6 +59,7 @@ If enabled, there are two scenarios:
 * If not, it will download from **jar_url** option
 
 **jar_path** (string) - see above
+
 **jar_url** (string)  - see above
 
 
