@@ -1,6 +1,6 @@
+.*
 *.log
 *.jar
 *.xml
-*.tgz
 /node_modules
 /reports
