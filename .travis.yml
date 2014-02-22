@@ -1,12 +1,8 @@
-env:
-  global:
-    - secure: pB9e6b+IunPXoCQjNuZhlCEZv3DD3LYAnrV5rOKbDwbg/s++15wE8swtyrPGx+rxo6rastbA0uadHWhb+pgfYLhfvDDZyBrhyONv1WtWAA6XgVFDgX4WVpP00J3/U5GENvsUIkeNiRMMKKSM0pXJzOuZ2L5Npi0iwoLf2XqoLL4=
-    - secure: qxvYkErMsx2cHpk4hEWxW5TnMWslo3S96R7SyNpCQ4GuSX/zwanWcW1SyYJkOzPKkFNOrnrmH82efgSyKBbgGSrZfdLCbbly1YrDe55/l3gqS7URnh1lsSksW6p6hwygQ/O3RLGobT+pTHtQkbnbcNnKrKezQ3lhEisIw1SySp4=
 language: node_js
 node_js:
   - 0.9
 before_script:
-  - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash
+  - download.sh
 script:
   - npm install -g grunt-cli
   - grunt nightwatch:ci
