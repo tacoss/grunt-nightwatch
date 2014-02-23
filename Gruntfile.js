@@ -9,12 +9,13 @@ module.exports = function(grunt) {
     },
     nightwatch: {
       options: {
-        standalone: true,
-        local: {
-          jar_path: '/opt/selenium/server.jar'
-        },
-        ci: {
+        download: {
+          standalone: true,
           jar_path: 'selenium-server.jar'
+        },
+        local: {
+          standalone: true,
+          jar_path: '/opt/selenium/server.jar'
         }
       }
     }
@@ -24,5 +25,5 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['nightwatch:local']);
+  grunt.registerTask('default', ['nightwatch:download']);
 };

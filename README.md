@@ -79,7 +79,7 @@ nightwatch: {
 }
 ```
 
-Now you can execute `grunt nightwatch:other` to run your tests.
+Now you can execute `grunt nightwatch:demo` to run your tests.
 
 Note that your tests must be grouped together as follows: `tests/<group>/test.js`
 

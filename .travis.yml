@@ -1,8 +1,11 @@
 language: node_js
 node_js:
   - 0.9
-before_script:
-  - bash download.sh
+before_script: |
+  curl http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar > selenium-server.jar
+  export DISPLAY=:99.0
+  sh -e /etc/init.d/xvfb start
+  java -jar selenium-server.jar &
 script:
   - npm install -g grunt-cli
-  - grunt nightwatch:ci
+  - grunt nightwatch
