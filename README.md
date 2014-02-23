@@ -86,7 +86,3 @@ Note that your tests must be grouped together as follows: `tests/<group>/test.js
 ## Build status
 
 [![Build Status](https://travis-ci.org/pateketrueke/grunt-nightwatch.png)](https://travis-ci.org/pateketrueke/grunt-nightwatch)
-
-Actually works as NPM package (?) but I can't figure out how test this on Travis-CI or similar.
-
-Any help?
