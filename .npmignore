@@ -4,3 +4,4 @@
 *.xml
 /node_modules
 /reports
+/tests
