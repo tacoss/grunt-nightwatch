@@ -1,25 +1,39 @@
 module.exports = function(grunt) {
   grunt.registerTask('nightwatch', 'Run your Nightwatch.js tests', function(target) {
     var path = require('path'),
-        fs = require('fs');
+        fs = require('fs'),
+        _ = grunt.util._;
 
     var options = this.options({
       jar_url: 'http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar',
       jar_path: '/opt/selenium/server-standalone.2.39.0.jar',
-      standalone: false,
-      settings: {
-        src_folders: ['tests'],
-        output_folder: 'reports',
-        selenium: { log_path: 'logs' },
-        test_settings: {}
-      }
+      standalone: false
     });
 
-    var group = target || 'default';
+    var defaults = {
+      src_folders: ['tests'],
+      output_folder: 'reports',
+      selenium: { log_path: '' },
+      test_settings: { silent: true }
+    };
 
-    options.settings.test_settings[group] = options[group] || {};
+    var group = target || 'default',
+        settings_json = process.cwd() + '/settings.json',
+        fake_opts = ['standalone', 'jar_path', 'jar_url'];
 
-    grunt.util._.extend(options, options.settings.test_settings[group]);
+    var settings = _.extend({}, defaults, options.settings);
+
+    if (fs.existsSync(settings_json)) {
+      _.extend(settings, grunt.file.readJSON(settings_json));
+    }
+
+    if ('object' !== typeof settings.test_settings) {
+      settings.test_settings = {};
+    }
+
+    _.extend(settings.test_settings, options.test_settings, _.omit(options[group], fake_opts));
+    _.extend(settings, _.omit(options[group] || {}, fake_opts));
+    _.extend(options, _.pick(options[group] || {}, fake_opts));
 
     // download utility
     var http = require('http'),
@@ -64,9 +78,13 @@ module.exports = function(grunt) {
     // nightwatch-runner
     function runTests(params) {
       function expandSettings(options) {
-        var defaults = grunt.util._.extend({}, options.settings);
+        var defaults = _.extend({}, settings);
 
         if (options.standalone) {
+          if (!defaults.selenium) {
+            defaults.selenium = {};
+          }
+
           defaults.selenium.start_process = true;
           defaults.selenium.server_path = options.jar_path;
         }
@@ -77,19 +95,19 @@ module.exports = function(grunt) {
       // https://github.com/beatfactor/nightwatch/blob/master/bin/runner.js
       var nw_dir = path.dirname(__dirname) + '/node_modules/nightwatch',
           runner = require(nw_dir + '/runner/run.js'),
-          settings = expandSettings(params);
+          setup = expandSettings(params);
 
       var config = {
-        output_folder: settings.output_folder,
-        selenium: settings.selenium
+        output_folder: setup.output_folder,
+        selenium: setup.selenium
       };
 
       grunt.log.ok('Executing "' + group + '" tests');
 
-      if (settings.selenium.start_process) {
+      if (setup.selenium.start_process) {
         var selenium = require(nw_dir + '/runner/selenium.js');
 
-        selenium.startServer(settings, settings.test_settings, function(error, child, error_out, exitcode) {
+        selenium.startServer(setup, setup.test_settings, function(error, child, error_out, exitcode) {
           if (error) {
             grunt.log.writeln('FAIL');
             grunt.log.error('There was an error while starting the Selenium server:');
@@ -97,7 +115,7 @@ module.exports = function(grunt) {
             process.exit(exitcode);
           }
 
-          runner.run(settings.src_folders, settings.test_settings, config, function(err) {
+          runner.run(setup.src_folders, setup.test_settings, config, function(err) {
             if (err) {
               grunt.log.writeln('FAIL');
               grunt.log.error('There was an error while running the test.');
@@ -106,7 +124,7 @@ module.exports = function(grunt) {
           });
         });
       } else {
-        runner.run(settings.src_folders, settings.test_settings, config);
+        runner.run(setup.src_folders, setup.test_settings, config);
       }
     }
 
