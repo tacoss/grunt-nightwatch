@@ -49,11 +49,17 @@ $ grunt nightwatch
 
 ## Options
 
-Currently, `grunt-nightwatch` supports four settings:
+Currently, `grunt-nightwatch` supports:
 
 **settings** (object)
 
 This mirrors the `settings.json` values required by Nightwatch.
+
+**test_settings**
+
+This mirrors the `test_settings` values required by Nightwatch.
+
+Also will be the defaults for custom targets, leaving the target options override them if needed.
 
 **standalone** (boolean)
 
@@ -66,6 +72,7 @@ If enabled, there are two scenarios:
 
 **jar_url** (string)  - see above
 
+Note that the **settings.json** file is fully supported, but your task options will override them if needed.
 
 ## Targets
 

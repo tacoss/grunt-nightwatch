@@ -9,12 +9,11 @@ module.exports = function(grunt) {
     },
     nightwatch: {
       options: {
+        standalone: true,
         download: {
-          standalone: true,
           jar_path: 'selenium-server.jar'
         },
         local: {
-          standalone: true,
           jar_path: '/opt/selenium/server.jar'
         }
       }
