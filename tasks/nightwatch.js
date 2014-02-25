@@ -35,6 +35,9 @@ module.exports = function(grunt) {
     _.extend(settings, _.omit(options[group] || {}, fake_opts));
     _.extend(options, _.pick(options[group] || {}, fake_opts));
 
+    grunt.verbose.ok('Task options');
+    grunt.verbose.writeln(JSON.stringify(options));
+
     // download utility
     var http = require('http'),
         url = require('url');
@@ -78,18 +81,21 @@ module.exports = function(grunt) {
     // nightwatch-runner
     function runTests(params) {
       function expandSettings(options) {
-        var defaults = _.extend({}, settings);
+        var target = _.extend({}, settings);
 
         if (options.standalone) {
-          if (!defaults.selenium) {
-            defaults.selenium = {};
+          if (!target.selenium) {
+            target.selenium = {};
           }
 
-          defaults.selenium.start_process = true;
-          defaults.selenium.server_path = options.jar_path;
+          target.selenium.start_process = true;
+          target.selenium.server_path = options.jar_path;
         }
 
-        return defaults;
+        grunt.verbose.ok('Target settings');
+        grunt.verbose.writeln(JSON.stringify(target));
+
+        return target;
       }
 
       // https://github.com/beatfactor/nightwatch/blob/master/bin/runner.js
