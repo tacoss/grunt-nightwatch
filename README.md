@@ -92,4 +92,4 @@ Note that your tests must be grouped together as follows: `tests/<group>/test.js
 
 ## Build status
 
-[![Build Status](https://travis-ci.org/pateketrueke/grunt-nightwatch.png)](https://travis-ci.org/pateketrueke/grunt-nightwatch)
+[![Build Status](https://travis-ci.org/pateketrueke/grunt-nightwatch.png?branch=master)](https://travis-ci.org/pateketrueke/grunt-nightwatch)
