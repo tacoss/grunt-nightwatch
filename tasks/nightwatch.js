@@ -11,18 +11,26 @@ module.exports = function(grunt) {
     });
 
     var defaults = {
-      src_folders: ['tests'],
-      output_folder: 'reports',
+      settings: {
+        src_folders: ['tests'],
+        output_folder: 'reports',
+      },
       selenium: { log_path: '' },
-      test_settings: { silent: true }
+      test_settings: { silent: true },
+      desiredCapabilities: {},
+      screenshots: {}
     };
 
     var group = target || 'default',
         settings_json = process.cwd() + '/settings.json',
         fake_opts = ['standalone', 'jar_path', 'jar_url'];
 
-    var settings = _.extend({}, defaults, options.settings);
+    var settings = {};
 
+    // apply the default options
+    var settings = _.extend({}, defaults.settings);
+
+    // load settings.json file
     if (fs.existsSync(settings_json)) {
       _.extend(settings, grunt.file.readJSON(settings_json));
     }
@@ -31,8 +39,20 @@ module.exports = function(grunt) {
       settings.test_settings = {};
     }
 
-    _.extend(settings.test_settings, options.test_settings, _.omit(options[group], fake_opts));
-    _.extend(settings, _.omit(options[group] || {}, fake_opts));
+    if ('object' !== typeof settings.test_settings[group]) {
+      settings.test_settings[group] = {};
+    }
+
+    // extend settings with "selenium"
+    _.extend(settings, _.pick(defaults, 'selenium'));
+
+    // extend active target with global defaults
+    _.extend(settings.test_settings[group], _.pick(defaults, 'screenshots', 'desiredCapabilities'));
+
+    // load the target options with the global and target defaults
+    _.extend(settings.test_settings[group], options.test_settings, _.omit(options[group] || {}, fake_opts));
+
+    // override the global task options if needed
     _.extend(options, _.pick(options[group] || {}, fake_opts));
 
     grunt.verbose.ok('Task options');
@@ -84,16 +104,12 @@ module.exports = function(grunt) {
         var target = _.extend({}, settings);
 
         if (options.standalone) {
-          if (!target.selenium) {
-            target.selenium = {};
-          }
-
           target.selenium.start_process = true;
           target.selenium.server_path = options.jar_path;
         }
 
         grunt.verbose.ok('Target settings');
-        grunt.verbose.writeln(JSON.stringify(target));
+        grunt.verbose.writeln(JSON.stringify(target.test_settings[group]));
 
         return target;
       }
@@ -113,7 +129,7 @@ module.exports = function(grunt) {
       if (setup.selenium.start_process) {
         var selenium = require(nw_dir + '/runner/selenium.js');
 
-        selenium.startServer(setup, setup.test_settings, function(error, child, error_out, exitcode) {
+        selenium.startServer(setup, setup.test_settings[group], function(error, child, error_out, exitcode) {
           if (error) {
             grunt.log.writeln('FAIL');
             grunt.log.error('There was an error while starting the Selenium server:');
@@ -121,7 +137,7 @@ module.exports = function(grunt) {
             process.exit(exitcode);
           }
 
-          runner.run(setup.src_folders, setup.test_settings, config, function(err) {
+          runner.run(setup.src_folders, setup.test_settings[group], config, function(err) {
             if (err) {
               grunt.log.writeln('FAIL');
               grunt.log.error('There was an error while running the test.');
@@ -130,7 +146,7 @@ module.exports = function(grunt) {
           });
         });
       } else {
-        runner.run(setup.src_folders, setup.test_settings, config);
+        runner.run(setup.src_folders, setup.test_settings[group], config);
       }
     }
 
