@@ -1,0 +1,9 @@
+{
+  "src_folders": ["tests"],
+  "output_folder": "tests_output",
+  "test_settings": {
+    "file": {
+      "silent": true
+    }
+  }
+}
