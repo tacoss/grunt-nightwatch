@@ -25,8 +25,6 @@ module.exports = function(grunt) {
         settings_json = process.cwd() + '/settings.json',
         fake_opts = ['standalone', 'jar_path', 'jar_url'];
 
-    var settings = {};
-
     // apply the default options
     var settings = _.extend({}, defaults.settings);
 
