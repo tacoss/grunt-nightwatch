@@ -51,26 +51,30 @@ $ grunt nightwatch
 
 Currently, `grunt-nightwatch` supports:
 
-**settings** (object)
+* **settings** (object)
 
-This mirrors the `settings.json` values required by Nightwatch.
+  This mirrors the `settings.json` values required by Nightwatch.
 
-**test_settings**
+* **test_settings**
 
-This mirrors the `test_settings` values required by Nightwatch.
+  This mirrors the `test_settings` values required by Nightwatch.
 
-Also will be the defaults for custom targets, leaving the target options override them if needed.
+  Also will be the defaults for custom targets, leaving the target options override them if needed.
 
-**standalone** (boolean)
+* **desiredCapabilities**, **screenshots** and **selenium** values works the same as **test_settings** respectively.
 
-If enabled, there are two scenarios:
+  This means global **screenshots** will be the _defaults_ on the active target, while global **selenium** applies for **settings** only.
 
-* If **jar_path** option exists then use it
-* If not, it will download from **jar_url** option
+* **standalone** (boolean)
 
-**jar_path** (string) - see above
+  If enabled, there are two scenarios:
 
-**jar_url** (string)  - see above
+  * If **jar_path** option exists then use it
+  * If not, it will download from **jar_url** option
+
+* **jar_path** (string) - see above
+
+* **jar_url** (string)  - see above
 
 Note that the **settings.json** file is fully supported, but your task options will override them if needed.
 
