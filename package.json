@@ -14,7 +14,7 @@
     "browser",
     "testing",
     "selenium",
-    "automated"
+    "automated",
     "functional",
     "nightwatch"
   ],

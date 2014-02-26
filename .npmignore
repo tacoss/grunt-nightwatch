@@ -1,7 +1,10 @@
 .*
+*.sh
 *.log
 *.jar
 *.xml
+*.json
+Gruntfile.js
 /node_modules
 /reports
 /tests
