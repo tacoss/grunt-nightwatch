@@ -30,6 +30,9 @@ module.exports = function(grunt) {
     // apply the default options
     var settings = _.extend({}, defaults.settings);
 
+    // extend selenium options before anything!
+    _.extend(settings, _.pick(defaults, 'selenium'));
+
     // load settings.json file
     if (fs.existsSync(settings_json)) {
       _.extend(settings, grunt.file.readJSON(settings_json));
@@ -42,9 +45,6 @@ module.exports = function(grunt) {
     if ('object' !== typeof settings.test_settings[group]) {
       settings.test_settings[group] = {};
     }
-
-    // extend settings with "selenium"
-    _.extend(settings, _.pick(defaults, 'selenium'));
 
     // extend active target with global defaults
     _.extend(settings.test_settings[group], _.pick(defaults, 'screenshots', 'desiredCapabilities'));
