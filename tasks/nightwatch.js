@@ -104,6 +104,10 @@ module.exports = function(grunt) {
         var target = _.extend({}, settings);
 
         if (options.standalone) {
+          if (!target.selenium) {
+            target.selenium = {};
+          }
+
           target.selenium.start_process = true;
           target.selenium.server_path = options.jar_path;
         }
