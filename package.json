@@ -1,5 +1,5 @@
 {
-  "version": "0.1.3",
+  "version": "0.1.4",
   "name": "grunt-nightwatch",
   "description": "Run your Nightwatch.js tests with Grunt",
   "repository": {
