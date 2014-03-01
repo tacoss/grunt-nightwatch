@@ -9,15 +9,6 @@ module.exports = function(grunt) {
     },
     nightwatch: {
       options: {
-        remote: {
-          silent: true,
-          selenium_host: 'localhost',
-          selenium_port: 4445,
-          desiredCapabilities: {
-            username: process.env['SAUCE_USERNAME'],
-            accessKey: process.env['SAUCE_ACCESS_KEY']
-          }
-        },
         download: {
           standalone: true,
           jar_path: 'selenium-server.jar'

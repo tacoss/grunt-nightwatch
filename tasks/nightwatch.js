@@ -1,8 +1,39 @@
 module.exports = function(grunt) {
   grunt.registerTask('nightwatch', 'Run your Nightwatch.js tests', function(target) {
-    var path = require('path'),
+    var slice = Array.prototype.slice,
+        path = require('path'),
         fs = require('fs'),
         _ = grunt.util._;
+
+    function replaceEnv(value) {
+      if ('string' === typeof value) {
+        return value.replace(/\$\{(\w+)\}/g, function(match, key) {
+          return process.env[key] || match;
+        });
+      }
+
+      return value;
+    }
+
+    function mergeVars(target) {
+      var args = slice.call(arguments, 1);
+
+      if (!target) {
+        target = {};
+      }
+
+      _.each(args, function(source) {
+        _.each(source, function(value, key) {
+          if (!_.isArray(value) && _.isObject(value)) {
+            target[key] = mergeVars(target[key], value);
+          } else {
+            target[key] = replaceEnv('undefined' !== typeof target[key] ? target[key] : value);
+          }
+        });
+      });
+
+      return target;
+    }
 
     var options = this.options({
       jar_url: 'http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar',
@@ -26,14 +57,14 @@ module.exports = function(grunt) {
         fake_opts = ['standalone', 'jar_path', 'jar_url'];
 
     // apply the default options
-    var settings = _.extend({}, defaults.settings);
+    var settings = mergeVars({}, defaults.settings);
 
     // extend selenium options before anything!
-    _.extend(settings, _.pick(defaults, 'selenium'));
+    mergeVars(settings, _.pick(defaults, 'selenium'));
 
     // load settings.json file
     if (fs.existsSync(settings_json)) {
-      _.extend(settings, grunt.file.readJSON(settings_json));
+      mergeVars(settings, grunt.file.readJSON(settings_json));
     }
 
     if ('object' !== typeof settings.test_settings) {
@@ -45,13 +76,13 @@ module.exports = function(grunt) {
     }
 
     // extend active target with global defaults
-    _.extend(settings.test_settings[group], _.pick(defaults, 'screenshots', 'desiredCapabilities'));
+    mergeVars(settings.test_settings[group], _.pick(defaults, 'screenshots', 'desiredCapabilities'));
 
     // load the target options with the global and target defaults
-    _.extend(settings.test_settings[group], options.test_settings, _.omit(options[group] || {}, fake_opts));
+    mergeVars(settings.test_settings[group], options.test_settings, _.omit(options[group] || {}, fake_opts));
 
     // override the global task options if needed
-    _.extend(options, _.pick(options[group] || {}, fake_opts));
+    mergeVars(options, _.pick(options[group] || {}, fake_opts));
 
     grunt.verbose.ok('Task options');
     grunt.verbose.writeln(JSON.stringify(options));
@@ -99,7 +130,7 @@ module.exports = function(grunt) {
     // nightwatch-runner
     function runTests(params) {
       function expandSettings(options) {
-        var target = _.extend({}, settings);
+        var target = mergeVars({}, settings);
 
         if (options.standalone) {
           if (!target.selenium) {

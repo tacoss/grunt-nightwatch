@@ -9,4 +9,4 @@ before_script:
   - bash saucelabs.sh
   - npm install -g grunt-cli
 script:
-  - grunt nightwatch:remote
+  - grunt nightwatch:saucelabs
