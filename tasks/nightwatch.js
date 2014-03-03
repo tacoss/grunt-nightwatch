@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           if (!_.isArray(value) && _.isObject(value)) {
             target[key] = mergeVars(target[key], value);
           } else {
-            target[key] = replaceEnv('undefined' !== typeof target[key] ? target[key] : value);
+            target[key] = replaceEnv(value || target[key]);
           }
         });
       });
@@ -66,6 +66,9 @@ module.exports = function(grunt) {
     if (fs.existsSync(settings_json)) {
       mergeVars(settings, grunt.file.readJSON(settings_json));
     }
+
+    // extend settings using task and target options
+    mergeVars(settings, options.settings, (options[group] || {}).settings);
 
     if ('object' !== typeof settings.test_settings) {
       settings.test_settings = {};
