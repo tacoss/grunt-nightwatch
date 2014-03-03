@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           if (!_.isArray(value) && _.isObject(value)) {
             target[key] = mergeVars(target[key], value);
           } else {
-            target[key] = replaceEnv('undefined' !== typeof target[key] ? target[key] : value);
+            target[key] = replaceEnv(value);
           }
         });
       });
