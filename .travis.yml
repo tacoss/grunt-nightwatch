@@ -1,7 +1,7 @@
 env:
   global:
     - secure: pB9e6b+IunPXoCQjNuZhlCEZv3DD3LYAnrV5rOKbDwbg/s++15wE8swtyrPGx+rxo6rastbA0uadHWhb+pgfYLhfvDDZyBrhyONv1WtWAA6XgVFDgX4WVpP00J3/U5GENvsUIkeNiRMMKKSM0pXJzOuZ2L5Npi0iwoLf2XqoLL4=
-    - secure: SFz+jXpW7tBz4YaB7a4IfxEWwjCKzUupLksP8cmuhLK/QKOmxxQQkU2jqzPuPk+Nw+WZCuERnVoR4lNyWBs2WowjzpNtagS8AhFAIz8vLBjad1JX9NKIRRT25KxFeKb/NpJPnVzeGba7/1ERNfJcub9s0BxDflWIPzVkuLoAi2g=
+    - secure: IwYyvR4ZSvcDSxKdxcIquY09tnXMe9rBPK17JDbl4uZOfAztKHUk89Ar++oqQBsyBhgMrM3XYbt40uKg37KjZpi4qf7kT/hZtioQM6CnLaqCcN9naWSLuteOlroY4VXJ02YGJsnjep7wz1A8BG9xz1VCmiP+E8xqFmdxTYHqXrw=
 language: node_js
 node_js:
   - 0.9
