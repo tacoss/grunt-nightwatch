@@ -179,14 +179,15 @@ module.exports = function(grunt) {
               grunt.log.error('There was an error while running the test.');
             }
             selenium.stopServer();
+            options.doneCallback();
           });
         });
       } else {
-        runner.run(setup.src_folders, setup.test_settings[group], config);
+        runner.run(setup.src_folders, setup.test_settings[group], config, options.doneCallback);
       }
     }
 
-    this.async();
+    options.doneCallback = this.async();
 
     // if enabled, there are two scenarios:
     // - jar_path exists, then use it
