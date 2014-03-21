@@ -55,7 +55,7 @@ module.exports = function(grunt) {
     };
 
     var group = target || 'default',
-        settings_json = process.cwd() + '/settings.json',
+        settings_json = process.cwd() + '/nightwatch.json',
         fake_opts = ['standalone', 'jar_path', 'jar_url'];
 
     // apply the default options
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
     // extend selenium options before anything!
     mergeVars(settings, _.pick(defaults, 'selenium'));
 
-    // load settings.json file
+    // load nightwatch.json file
     if (fs.existsSync(settings_json)) {
       mergeVars(settings, grunt.file.readJSON(settings_json));
     }
