@@ -198,17 +198,22 @@ module.exports = function(grunt) {
             process.exit(exitcode);
           }
 
-          runner.run(setup.src_folders, setup.test_settings[group], config, function(err) {
+          runner.run(setup.src_folders, setup.test_settings[group], config, function(err, success) {
             if (err) {
               grunt.log.writeln('FAIL');
               grunt.log.error('There was an error while running the test.');
             }
             selenium.stopServer();
-            doneCallback();
+            doneCallback(success);
           });
         });
       } else {
-        runner.run(setup.src_folders, setup.test_settings[group], config, doneCallback);
+        runner.run(setup.src_folders, setup.test_settings[group], config, function(err, success) {
+          if (err) {
+            grunt.log.error('There was an error while running the test.');
+          }
+          doneCallback(success);
+        });
       }
     }
 
