@@ -67,6 +67,7 @@ module.exports = function(grunt) {
 
     var group = target || 'default',
         settings_json = process.cwd() + '/nightwatch.json',
+        deprecated_settings_json = process.cwd() + '/settings.json',
         fake_opts = ['standalone', 'jar_path', 'jar_url'];
 
     // apply the default options
@@ -78,6 +79,8 @@ module.exports = function(grunt) {
     // load nightwatch.json file
     if (fs.existsSync(settings_json)) {
       mergeVars(settings, grunt.file.readJSON(settings_json));
+    } else if (fs.existsSync(deprecated_settings_json)) {
+      mergeVars(settings, grunt.file.readJSON(deprecated_settings_json));
     }
 
     // extend settings using task and target options
