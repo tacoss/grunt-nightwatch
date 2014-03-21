@@ -17,6 +17,17 @@ module.exports = function(grunt) {
       return value;
     }
 
+    function parseCliOptions() {
+      var opts = {};
+      _.each(grunt.cli.options, function(value, key) {
+        if (key !== 'tasks' && key !== 'npm') {
+          opts[key] = value;
+        }
+      });
+
+      return opts;
+    }
+
     function mergeVars(target) {
       var args = slice.call(arguments, 1);
 
@@ -163,6 +174,15 @@ module.exports = function(grunt) {
       };
 
       grunt.log.ok('Executing "' + group + '" tests');
+
+      var cliOpts = parseCliOptions();
+
+      // adding ability to run a single test via --test cli argument
+      if (cliOpts.test) {
+        var testsource = (cliOpts.test.indexOf(process.cwd()) === -1) ? path.join(process.cwd(), cliOpts.test) : cliOpts.test;
+        fs.statSync(testsource);
+        setup.src_folders = testsource;
+      }
 
       if (setup.selenium.start_process) {
         var selenium = require(nw_dir + '/runner/selenium.js');
