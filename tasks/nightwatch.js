@@ -17,6 +17,17 @@ module.exports = function(grunt) {
       return value;
     }
 
+    function parseCliOptions() {
+      var opts = {};
+      _.each(grunt.cli.options, function(value, key) {
+        if (key !== 'tasks' && key !== 'npm') {
+          opts[key] = value;
+        }
+      });
+
+      return opts;
+    }
+
     function mergeVars(target) {
       var args = slice.call(arguments, 1);
 
@@ -38,8 +49,8 @@ module.exports = function(grunt) {
     }
 
     var options = this.options({
-      jar_url: 'http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar',
-      jar_path: '/opt/selenium/server-standalone.2.39.0.jar',
+      jar_url: 'http://selenium-release.storage.googleapis.com/2.40/selenium-server-standalone-2.40.0.jar',
+      jar_path: '/opt/selenium/server-standalone.2.40.0.jar',
       standalone: false
     });
 
@@ -55,7 +66,8 @@ module.exports = function(grunt) {
     };
 
     var group = target || 'default',
-        settings_json = process.cwd() + '/settings.json',
+        settings_json = process.cwd() + '/nightwatch.json',
+        deprecated_settings_json = process.cwd() + '/settings.json',
         fake_opts = ['standalone', 'jar_path', 'jar_url'];
 
     // apply the default options
@@ -64,9 +76,11 @@ module.exports = function(grunt) {
     // extend selenium options before anything!
     mergeVars(settings, _.pick(defaults, 'selenium'));
 
-    // load settings.json file
+    // load nightwatch.json file
     if (fs.existsSync(settings_json)) {
       mergeVars(settings, grunt.file.readJSON(settings_json));
+    } else if (fs.existsSync(deprecated_settings_json)) {
+      mergeVars(settings, grunt.file.readJSON(deprecated_settings_json));
     }
 
     // extend settings using task and target options
@@ -164,6 +178,15 @@ module.exports = function(grunt) {
 
       grunt.log.ok('Executing "' + group + '" tests');
 
+      var cliOpts = parseCliOptions();
+
+      // adding ability to run a single test via --test cli argument
+      if (cliOpts.test) {
+        var testsource = (cliOpts.test.indexOf(process.cwd()) === -1) ? path.join(process.cwd(), cliOpts.test) : cliOpts.test;
+        fs.statSync(testsource);
+        setup.src_folders = testsource;
+      }
+
       if (setup.selenium.start_process) {
         var selenium = require(nw_dir + '/runner/selenium.js');
 
@@ -175,17 +198,22 @@ module.exports = function(grunt) {
             process.exit(exitcode);
           }
 
-          runner.run(setup.src_folders, setup.test_settings[group], config, function(err) {
+          runner.run(setup.src_folders, setup.test_settings[group], config, function(err, success) {
             if (err) {
               grunt.log.writeln('FAIL');
               grunt.log.error('There was an error while running the test.');
             }
             selenium.stopServer();
-            doneCallback();
+            doneCallback(success);
           });
         });
       } else {
-        runner.run(setup.src_folders, setup.test_settings[group], config, doneCallback);
+        runner.run(setup.src_folders, setup.test_settings[group], config, function(err, success) {
+          if (err) {
+            grunt.log.error('There was an error while running the test.');
+          }
+          doneCallback(success);
+        });
       }
     }
 
