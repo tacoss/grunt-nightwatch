@@ -95,10 +95,15 @@ module.exports = function(grunt) {
     }
 
     // extend active target with global defaults
-    mergeVars(settings.test_settings[group], _.pick(defaults, 'screenshots', 'desiredCapabilities'));
+    mergeVars(settings.test_settings[group],
+      _.pick(defaults, 'screenshots', 'desiredCapabilities'),
+      _.pick(options.settings || {}, 'custom_commands_path', 'custom_assertions_path'));
 
     // load the target options with the global and target defaults
-    mergeVars(settings.test_settings[group], defaults.test_settings, options.test_settings, _.omit(options[group] || {}, fake_opts));
+    mergeVars(settings.test_settings[group],
+      defaults.test_settings,
+      options.test_settings,
+      _.omit(options[group] || {}, fake_opts));
 
     // override the global task options if needed
     mergeVars(options, _.pick(options[group] || {}, fake_opts));
