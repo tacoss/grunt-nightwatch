@@ -98,7 +98,7 @@ module.exports = function(grunt) {
     mergeVars(settings.test_settings[group], _.pick(defaults, 'screenshots', 'desiredCapabilities'));
 
     // load the target options with the global and target defaults
-    mergeVars(settings.test_settings[group], options.test_settings, _.omit(options[group] || {}, fake_opts));
+    mergeVars(settings.test_settings[group], defaults.test_settings, options.test_settings, _.omit(options[group] || {}, fake_opts));
 
     // override the global task options if needed
     mergeVars(options, _.pick(options[group] || {}, fake_opts));
