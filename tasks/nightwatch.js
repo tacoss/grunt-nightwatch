@@ -18,14 +18,7 @@ module.exports = function(grunt) {
     }
 
     function parseCliOptions() {
-      var opts = {};
-      _.each(grunt.cli.options, function(value, key) {
-        if (key !== 'tasks' && key !== 'npm') {
-          opts[key] = value;
-        }
-      });
-
-      return opts;
+      return _.omit(grunt.cli.options, ['tasks', 'npm']);
     }
 
     function mergeVars(target) {
