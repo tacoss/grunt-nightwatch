@@ -8,3 +8,4 @@ Gruntfile.js
 /node_modules
 /reports
 /tests
+/tests_output
