@@ -173,7 +173,7 @@ module.exports = function(grunt) {
 
       // https://github.com/beatfactor/nightwatch/blob/master/bin/runner.js
       var nw_dir = path.dirname(__dirname) + '/node_modules/nightwatch',
-          runner = require(nw_dir + '/runner/run.js'),
+          runner = require(nw_dir + '/lib/runner/run.js'),
           setup = expandSettings(params);
 
       var config = {
@@ -193,7 +193,7 @@ module.exports = function(grunt) {
       }
 
       if (setup.selenium.start_process) {
-        var selenium = require(nw_dir + '/runner/selenium.js');
+        var selenium = require(nw_dir + '/lib/runner/selenium.js');
 
         selenium.startServer(setup, setup.test_settings[group], function(error, child, error_out, exitcode) {
           if (error) {
