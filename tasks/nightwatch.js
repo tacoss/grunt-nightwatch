@@ -101,6 +101,10 @@ module.exports = function(grunt) {
     // override the global task options if needed
     mergeVars(options, _.pick(options[group] || {}, fake_opts));
 
+    // override some global options if needed
+    mergeVars(settings,
+      _.pick(settings.test_settings[group], ['src_folders', 'output_folder']))
+
     grunt.verbose.ok('Task options');
     grunt.verbose.writeln(JSON.stringify(options));
 
