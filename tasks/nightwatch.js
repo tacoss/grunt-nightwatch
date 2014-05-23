@@ -144,6 +144,20 @@ module.exports = function(grunt) {
       req.end();
     }
 
+    function errorHandler(err) {
+      if (err) {
+        grunt.log.writeln('FAIL');
+
+        if (err.message) {
+          grunt.log.error(err.message);
+        } else {
+          grunt.log.error('There was an error while running the test.');
+        }
+
+        doneCallback(false);
+      }
+    }
+
     // nightwatch-runner
     function runTests(params) {
       function expandSettings(options) {
@@ -196,21 +210,14 @@ module.exports = function(grunt) {
             process.exit(exitcode);
           }
 
-          runner.run(setup.src_folders, setup.test_settings[group], config, function(err, success) {
-            if (err) {
-              grunt.log.writeln('FAIL');
-              grunt.log.error('There was an error while running the test.');
-            }
+          runner.run(setup.src_folders, setup.test_settings[group], config, function(err) {
             selenium.stopServer();
-            doneCallback(success);
+            errorHandler(err);
           });
         });
       } else {
-        runner.run(setup.src_folders, setup.test_settings[group], config, function(err, success) {
-          if (err) {
-            grunt.log.error('There was an error while running the test.');
-          }
-          doneCallback(success);
+        runner.run(setup.src_folders, setup.test_settings[group], config, function(err) {
+          errorHandler(err);
         });
       }
     }
