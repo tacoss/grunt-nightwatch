@@ -53,7 +53,7 @@ module.exports = function(grunt) {
         output_folder: 'reports',
       },
       selenium: { log_path: '' },
-      test_settings: { silent: true },
+      test_settings: { silent: true, output: true },
       desiredCapabilities: {},
       screenshots: {}
     };
