@@ -157,9 +157,9 @@ module.exports = function(grunt) {
         } else {
           grunt.log.error('There was an error while running the test.');
         }
-
-        doneCallback(false);
       }
+
+      doneCallback(err);
     }
 
     // nightwatch-runner
