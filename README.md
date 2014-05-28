@@ -76,7 +76,7 @@ Currently, `grunt-nightwatch` supports:
 
 * **jar_url** (string)  - see above
 
-Note that the **settings.json** file is fully supported, but your task options will override them if needed.
+Note that the **nighwatch.json** file is fully supported, but your task options will override them if needed.
 
 ## Targets
 
@@ -96,4 +96,4 @@ Note that your tests must be grouped together as follows: `tests/<group>/test.js
 
 ## Build status
 
-[![Build Status](https://travis-ci.org/pateketrueke/grunt-nightwatch.png?branch=master)](https://travis-ci.org/pateketrueke/grunt-nightwatch)
+[![Build Status](https://travis-ci.org/gextech/grunt-nightwatch.png?branch=master)](https://travis-ci.org/gextech/grunt-nightwatch)

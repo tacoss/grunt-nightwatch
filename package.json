@@ -4,10 +4,10 @@
   "description": "Run your Nightwatch.js tests with Grunt",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pateketrueke/grunt-nightwatch.git"
+    "url": "https://github.com/gextech/grunt-nightwatch.git"
   },
   "bugs": {
-    "url": "https://github.com/pateketrueke/grunt-nightwatch/issues"
+    "url": "https://github.com/gextech/grunt-nightwatch/issues"
   },
   "keywords": [
     "ci",
