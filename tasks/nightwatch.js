@@ -44,7 +44,8 @@ module.exports = function(grunt) {
     var options = this.options({
       jar_url: 'http://selenium-release.storage.googleapis.com/2.40/selenium-server-standalone-2.40.0.jar',
       jar_path: '/opt/selenium/server-standalone.2.40.0.jar',
-      standalone: false
+      standalone: false,
+      timeout: 100
     });
 
     var defaults = {
@@ -159,7 +160,9 @@ module.exports = function(grunt) {
         }
       }
 
-      doneCallback(err);
+      setTimeout(function() {
+        doneCallback(err);
+      }, options.timeout || 100);
     }
 
     // nightwatch-runner
