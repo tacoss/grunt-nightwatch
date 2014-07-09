@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "nightwatch": "~0.4.17"
+    "nightwatch": "~0.5.8"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
