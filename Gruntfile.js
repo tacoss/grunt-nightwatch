@@ -22,8 +22,6 @@ module.exports = function(grunt) {
   });
 
   grunt.loadTasks('tasks');
-
   grunt.loadNpmTasks('grunt-contrib-watch');
-
   grunt.registerTask('default', ['nightwatch:local']);
 };
