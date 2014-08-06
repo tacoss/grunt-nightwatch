@@ -1,4 +1,4 @@
-module.exports.getTitle = function(callback) {
+module.exports = function(callback) {
   var browser = this;
 
   browser.execute(function() {
