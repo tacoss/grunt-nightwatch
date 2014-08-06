@@ -1,6 +1,7 @@
 {
   "src_folders": ["tests"],
   "output_folder": "tests_output",
+  "custom_commands_path": "commands",
   "test_settings": {
     "saucelabs": {
       "silent": true,
