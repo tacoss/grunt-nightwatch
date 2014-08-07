@@ -14,10 +14,7 @@ module.exports = function(grunt) {
         src_folders: ['tests'],
         output_folder: 'reports'
       },
-      selenium: { log_path: '' },
-      test_settings: { silent: true, output: true },
-      desiredCapabilities: {},
-      screenshots: {}
+      test_settings: { silent: true, output: true }
     };
 
     var group = target || 'default',
@@ -33,9 +30,6 @@ module.exports = function(grunt) {
     // apply the default options
     var settings = $.mergeVars({}, defaults.settings);
 
-    // extend selenium options before anything!
-    $.mergeVars(settings, _.pick(defaults, settings_opts));
-
     // load nightwatch.json file
     if ($.exists(settings_json)) {
       $.mergeVars(settings, $.json(settings_json));
@@ -48,10 +42,7 @@ module.exports = function(grunt) {
     _.isObject(settings.test_settings[group]) || (settings.test_settings[group] = {});
 
     // load the target options with the global and target defaults
-    $.mergeVars(settings.test_settings[group], defaults.test_settings, options.test_settings, _.omit(options[group] || {}, fake_opts));
-
-    // extend active target with global defaults
-    $.mergeVars(settings.test_settings[group], _.pick(defaults, 'screenshots', 'desiredCapabilities'));
+    $.mergeVars(settings.test_settings[group], defaults.test_settings, options.test_settings, _.pick(options[group] || {}, settings_opts));
 
     // override the global task options if needed
     $.mergeVars(options, _.pick(options[group] || {}, fake_opts));
