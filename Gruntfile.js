@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         local: {
           standalone: true,
           jar_path: '/opt/selenium/server.jar',
-          custom_commands_path: 'commands'
+          custom_commands_path: 'helpers'
         }
       }
     }

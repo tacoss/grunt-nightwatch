@@ -7,9 +7,7 @@ module.exports = {
       .waitForElementVisible('button[name=btnG]', 1000)
       .click('button[name=btnG]').pause(1000)
       .assert.containsText('#ires', 'joyent/node')
-      .getTitle(function(result) {
-        browser.assert.equal(result.split(' ')[0], 'nodejs', 'page title contains "nodejs".');
-      })
+      .custom_cmd('nodejs')
       .end();
   }
 };
