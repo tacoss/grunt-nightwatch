@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     }
 
     // extend settings using task and target options
-    $.mergeVars(settings, options.settings, (options[group] || {}).settings);
+    $.mergeVars(settings, options.settings, (options[group] || {}).settings, _.pick(options, settings_opts));
 
     _.isObject(settings.test_settings) || (settings.test_settings = {});
     _.isObject(settings.test_settings[group]) || (settings.test_settings[group] = {});
