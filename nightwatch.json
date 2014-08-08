@@ -2,7 +2,7 @@
   "selenium": {},
   "src_folders": ["tests"],
   "output_folder": "tests_output",
-  "custom_commands_path": "commands",
+  "custom_commands_path": "helpers",
   "test_settings": {
     "saucelabs": {
       "silent": true,
