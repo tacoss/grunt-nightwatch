@@ -35,6 +35,10 @@ module.exports = function(grunt) {
       $.mergeVars(settings, $.json(settings_json));
     }
 
+    if (!settings.selenium) {
+      settings.selenium = {};
+    }
+
     // extend settings using task and target options
     $.mergeVars(settings, options.settings, (options[group] || {}).settings, _.pick(options, settings_opts));
 
