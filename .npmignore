@@ -7,5 +7,6 @@
 Gruntfile.js
 /node_modules
 /reports
+/helpers
 /tests
 /tests_output
