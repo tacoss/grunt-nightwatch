@@ -9,14 +9,14 @@ module.exports = function(grunt) {
     },
     nightwatch: {
       options: {
+        custom_commands_path: 'helpers',
         download: {
           standalone: true,
           jar_path: 'selenium-server.jar'
         },
         local: {
           standalone: true,
-          jar_path: '/opt/selenium/server.jar',
-          custom_commands_path: 'helpers'
+          jar_path: '/opt/selenium/server.jar'
         }
       }
     }

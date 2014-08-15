@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     _.isObject(settings.test_settings[group]) || (settings.test_settings[group] = {});
 
     // load the target options with the global and target defaults
-    $.mergeVars(settings.test_settings[group], defaults.test_settings, options.test_settings, _.pick(options[group] || {}, settings_opts));
+    $.mergeVars(settings.test_settings[group], defaults.test_settings, options.test_settings, _.pick(options, settings_opts), _.pick(options[group] || {}, settings_opts));
 
     // override the global task options if needed
     $.mergeVars(options, _.pick(options[group] || {}, fake_opts));
