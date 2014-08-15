@@ -45,6 +45,9 @@ module.exports = function(grunt) {
     _.isObject(settings.test_settings) || (settings.test_settings = {});
     _.isObject(settings.test_settings[group]) || (settings.test_settings[group] = {});
 
+    // merge test_settings defaults
+    $.mergeVars(defaults.test_settings, settings.test_settings['default'] || {});
+
     // load the target options with the global and target defaults
     $.mergeVars(settings.test_settings[group], defaults.test_settings, options.test_settings, _.pick(options, settings_opts), _.pick(options[group] || {}, settings_opts));
 
