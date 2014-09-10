@@ -13,9 +13,10 @@ module.exports = function(grunt) {
       src_folders: ['tests'],
       output_folder: 'reports',
       test_settings: {
-        silent: true,
-        output: true,
-        'default': {}
+        'default': {
+          silent: true,
+          output: true
+        }
       }
     };
 
