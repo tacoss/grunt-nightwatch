@@ -10,4 +10,4 @@ node_js:
 before_script:
   - npm install -g grunt-cli
 script:
-  - grunt nightwatch:saucelabs:saucelabs
+  - grunt nightwatch:saucelabs
