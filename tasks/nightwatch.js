@@ -30,7 +30,9 @@ module.exports = function(grunt) {
           'launch_url', 'selenium_host', 'selenium_port', 'silent',
           'output', 'disable_colors', 'screenshots', 'username',
           'access_key', 'desiredCapabilities', 'exclude',
-          'filter', 'use_xpath'
+          'filter', 'use_xpath',
+          'chrome_driver',
+          'ie_driver'
         ];
 
     if ($.exists(deprecated_settings_json)) {
@@ -54,11 +56,6 @@ module.exports = function(grunt) {
     $.mergeVars(settings, _.pick(config.options || {}, settings_opts));
     $.mergeVars(options, _.pick(config.options || {}, fake_opts));
 
-    _.each(group, function (name) {
-      $.mergeVars(settings, _.pick(config.options || {}, settings_opts), _.pick(config.options[name] || {}, settings_opts), _.pick(config[name] || {}, settings_opts));
-      $.mergeVars(options, _.pick(config.options || {}, fake_opts), _.pick(config.options[name] || {}, fake_opts), _.pick(config[name] || {}, fake_opts));
-    });
-
     // warn deprecated-settings
     if (_.has(settings, 'settings')) {
       $.log.error('Deprecated property "settings" will not be merged');
@@ -68,13 +65,25 @@ module.exports = function(grunt) {
     _.isObject(settings.test_settings) || (settings.test_settings = {});
 
     // extend default test_settings using task/options
-    $.mergeVars(settings.test_settings['default'], _.pick(config.options['default'] || {}, settings_opts), _.pick(config['default'] || {}, settings_opts));
+    $.mergeVars(
+      settings.test_settings['default'],
+      _.omit(_.pick(settings || {}, settings_opts), 'test_settings'),
+      _.pick(config.options['default'] || {}, settings_opts),
+      _.pick(config['default'] || {}, settings_opts),
+      _.pick(config || {}, settings_opts)
+    );
 
     // load the target options with the global and target defaults
     _.each(group, function (name) {
       _.isObject(settings.test_settings[name]) || (settings.test_settings[name] = {});
 
-      $.mergeVars(settings.test_settings[name], settings.test_settings['default'], _.omit(_.pick(settings, settings_opts), 'test_settings'));
+      $.mergeVars(
+        settings.test_settings[name],
+        settings.test_settings['default'],
+        _.pick(config.options[name] || {}, settings_opts),
+        _.pick(config.options || {}, settings_opts),
+        _.pick(config[name] || {}, settings_opts)
+      );
     });
 
     $.verbose.ok('Task options');
