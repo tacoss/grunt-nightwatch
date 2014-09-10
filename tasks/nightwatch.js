@@ -24,7 +24,14 @@ module.exports = function(grunt) {
         settings_json = $.cwd('nightwatch.json'),
         deprecated_settings_json = $.cwd('settings.json'),
         fake_opts = ['standalone', 'jar_path', 'jar_url'],
-        settings_opts = ['globals', 'selenium', 'src_folders', 'output_folder', 'globals_path', 'custom_commands_path', 'custom_assertions_path', 'test_settings'];
+        settings_opts = [
+          'globals', 'selenium', 'src_folders', 'output_folder', 'globals_path',
+          'custom_commands_path', 'custom_assertions_path', 'test_settings',
+          'launch_url', 'selenium_host', 'selenium_port', 'silent',
+          'output', 'disable_colors', 'screenshots', 'username',
+          'access_key', 'desiredCapabilities', 'exclude',
+          'filter', 'use_xpath'
+        ];
 
     if ($.exists(deprecated_settings_json)) {
       $.log.error('Deprecated settings.json will not be merged (use nightwatch.json)');
