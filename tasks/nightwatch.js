@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         settings_json = $.cwd('nightwatch.json'),
         deprecated_settings_json = $.cwd('settings.json'),
         fake_opts = ['standalone', 'jar_path', 'jar_url'],
-        settings_opts = ['selenium', 'src_folders', 'output_folder', 'globals_path', 'custom_commands_path', 'custom_assertions_path', 'test_settings'];
+        settings_opts = ['globals', 'selenium', 'src_folders', 'output_folder', 'globals_path', 'custom_commands_path', 'custom_assertions_path', 'test_settings'];
 
     if ($.exists(deprecated_settings_json)) {
       $.log.error('Deprecated settings.json will not be merged (use nightwatch.json)');
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
     $.mergeVars(options, _.pick(config.options || {}, fake_opts));
 
     _.each(group, function (name) {
-      $.mergeVars(settings, _.pick(config.options || {}, settings_opts), _.pick(config.options[name] || {}, settings_opts));
+      $.mergeVars(settings, _.pick(config.options || {}, settings_opts), _.pick(config.options[name] || {}, settings_opts), _.pick(config[name] || {}, settings_opts));
       $.mergeVars(options, _.pick(config.options || {}, fake_opts), _.pick(config.options[name] || {}, fake_opts), _.pick(config[name] || {}, fake_opts));
     });
 
