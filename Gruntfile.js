@@ -11,13 +11,12 @@ module.exports = function(grunt) {
       options: {
         custom_commands_path: 'helpers',
         download: {
-          standalone: true,
-          jar_path: 'selenium-server.jar'
-        },
-        local: {
-          standalone: true,
-          jar_path: '/opt/selenium/server.jar'
+          standalone: true
         }
+      },
+      local: {
+        standalone: true,
+        jar_path: __dirname + '/selenium-server-standalone-2.40.0.jar'
       }
     }
   });
