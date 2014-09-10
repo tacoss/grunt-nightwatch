@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-  grunt.registerTask('nightwatch', 'Run your Nightwatch.js tests', function(target) {
+  grunt.registerTask('nightwatch', 'Run your Nightwatch.js tests', function() {
     var $ = require('../lib/functions')(grunt),
         _ = grunt.util._;
 
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
       }
     };
 
-    var group = target || 'default',
+    var group = (arguments.length && Array.prototype.slice.call(arguments)) || ['default'],
         settings_json = $.cwd('nightwatch.json'),
         deprecated_settings_json = $.cwd('settings.json'),
         fake_opts = ['standalone', 'jar_path', 'jar_url'],
@@ -44,8 +44,13 @@ module.exports = function(grunt) {
     }
 
     // extend settings using task and target options
-    $.mergeVars(settings, _.pick(config.options || {}, settings_opts), _.pick(config.options[group] || {}, settings_opts));
-    $.mergeVars(options, _.pick(config.options || {}, fake_opts), _.pick(config.options[group] || {}, fake_opts), _.pick(config[group] || {}, fake_opts));
+    $.mergeVars(settings, _.pick(config.options || {}, settings_opts));
+    $.mergeVars(options, _.pick(config.options || {}, fake_opts));
+
+    _.each(group, function (name) {
+      $.mergeVars(settings, _.pick(config.options || {}, settings_opts), _.pick(config.options[name] || {}, settings_opts));
+      $.mergeVars(options, _.pick(config.options || {}, fake_opts), _.pick(config.options[name] || {}, fake_opts), _.pick(config[name] || {}, fake_opts));
+    });
 
     // warn deprecated-settings
     if (_.has(settings, 'settings')) {
@@ -54,10 +59,13 @@ module.exports = function(grunt) {
 
     // create test_settings group if missing
     _.isObject(settings.test_settings) || (settings.test_settings = {});
-    _.isObject(settings.test_settings[group]) || (settings.test_settings[group] = {});
 
     // load the target options with the global and target defaults
-    $.mergeVars(settings.test_settings[group], settings.test_settings['default'], _.omit(_.pick(settings, settings_opts), 'test_settings'));
+    _.each(group, function (name) {
+      _.isObject(settings.test_settings[name]) || (settings.test_settings[name] = {});
+
+      $.mergeVars(settings.test_settings[name], settings.test_settings['default'], _.omit(_.pick(settings, settings_opts), 'test_settings'));
+    });
 
     $.verbose.ok('Task options');
     $.verbose.writeln(JSON.stringify(options));
