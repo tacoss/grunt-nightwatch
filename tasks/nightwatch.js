@@ -67,6 +67,9 @@ module.exports = function(grunt) {
     // create test_settings group if missing
     _.isObject(settings.test_settings) || (settings.test_settings = {});
 
+    // extend default test_settings using task/options
+    $.mergeVars(settings.test_settings['default'], _.pick(config.options['default'] || {}, settings_opts), _.pick(config['default'] || {}, settings_opts));
+
     // load the target options with the global and target defaults
     _.each(group, function (name) {
       _.isObject(settings.test_settings[name]) || (settings.test_settings[name] = {});
