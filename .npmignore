@@ -5,6 +5,7 @@
 *.xml
 *.json
 Gruntfile.js
+chromedriver
 /node_modules
 /reports
 /helpers

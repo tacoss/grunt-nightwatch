@@ -3,6 +3,7 @@
 *.jar
 *.xml
 *.tgz
+chromedriver
 /node_modules
 /reports
 /tests_output
