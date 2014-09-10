@@ -12,6 +12,17 @@ module.exports = function(grunt) {
         custom_commands_path: 'helpers',
         download: {
           standalone: true
+        },
+        firefox: {
+          desiredCapabilities: {
+            browserName: 'firefox'
+          }
+        },
+        chrome: {
+          desiredCapabilities: {
+            chrome_driver: __dirname + '/chromedriver',
+            browserName: 'chrome'
+          }
         }
       },
       local: {
