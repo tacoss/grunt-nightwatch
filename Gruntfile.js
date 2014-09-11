@@ -24,6 +24,9 @@ module.exports = function(grunt) {
           }
         }
       },
+      saucelabs: {
+        standalone: false
+      },
       local: {
         jar_path: __dirname + '/selenium-server-standalone-2.40.0.jar'
       },
