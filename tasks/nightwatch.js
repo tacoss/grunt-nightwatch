@@ -6,8 +6,8 @@ module.exports = function(grunt) {
     var config = grunt.config.get('nightwatch');
 
     var defaults = {
-      jar_url: 'http://selenium-release.storage.googleapis.com/2.40/selenium-server-standalone-2.40.0.jar',
-      jar_path: '/opt/selenium/server-standalone.2.40.0.jar',
+      jar_url: 'http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar',
+      jar_path: '/opt/selenium/server-standalone.2.42.2.jar',
       standalone: false,
       // nightwatch-settings
       src_folders: ['tests'],
@@ -25,7 +25,9 @@ module.exports = function(grunt) {
         deprecated_settings_json = $.cwd('settings.json');
 
     var fake_opts = [
-      'standalone', 'jar_path', 'jar_url'
+      'standalone', 'jar_path', 'jar_url',
+      'chrome_driver_path',
+      'ie_driver_path'
     ];
 
     var settings_opts = [
@@ -34,9 +36,7 @@ module.exports = function(grunt) {
       'launch_url', 'selenium_host', 'selenium_port', 'silent',
       'output', 'disable_colors', 'screenshots', 'username',
       'access_key', 'desiredCapabilities', 'exclude',
-      'filter', 'use_xpath',
-      'chrome_driver',
-      'ie_driver'
+      'filter', 'use_xpath'
     ];
 
     if ($.exists(deprecated_settings_json)) {
@@ -80,6 +80,14 @@ module.exports = function(grunt) {
     // load the target options with the global and target defaults
     _.each(group, function (name) {
       _.isObject(settings.test_settings[name]) || (settings.test_settings[name] = {});
+
+      // override task-options in order
+      $.mergeVars(
+        options,
+        _.pick(config.options[name] || {}, fake_opts),
+        _.pick(config.options || {}, fake_opts),
+        _.pick(config[name] || {}, fake_opts)
+      );
 
       $.mergeVars(
         settings.test_settings[name],
