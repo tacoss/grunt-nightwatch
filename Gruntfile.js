@@ -9,10 +9,10 @@ module.exports = function(grunt) {
     },
     nightwatch: {
       options: {
+        standalone: true,
         custom_commands_path: 'helpers',
-        download: {
-          standalone: true
-        },
+        chrome_driver_path: __dirname + '/chromedriver',
+        download: {},
         firefox: {
           desiredCapabilities: {
             browserName: 'firefox'
@@ -20,14 +20,15 @@ module.exports = function(grunt) {
         },
         chrome: {
           desiredCapabilities: {
-            chrome_driver: __dirname + '/chromedriver',
             browserName: 'chrome'
           }
         }
       },
       local: {
-        standalone: true,
         jar_path: __dirname + '/selenium-server-standalone-2.40.0.jar'
+      },
+      cli: {
+        standalone: false
       }
     }
   });
