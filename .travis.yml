@@ -2,6 +2,9 @@ env:
   global:
     - secure: pB9e6b+IunPXoCQjNuZhlCEZv3DD3LYAnrV5rOKbDwbg/s++15wE8swtyrPGx+rxo6rastbA0uadHWhb+pgfYLhfvDDZyBrhyONv1WtWAA6XgVFDgX4WVpP00J3/U5GENvsUIkeNiRMMKKSM0pXJzOuZ2L5Npi0iwoLf2XqoLL4=
     - secure: IwYyvR4ZSvcDSxKdxcIquY09tnXMe9rBPK17JDbl4uZOfAztKHUk89Ar++oqQBsyBhgMrM3XYbt40uKg37KjZpi4qf7kT/hZtioQM6CnLaqCcN9naWSLuteOlroY4VXJ02YGJsnjep7wz1A8BG9xz1VCmiP+E8xqFmdxTYHqXrw=
+branches:
+  only:
+    - master
 addons:
   sauce_connect: true
 language: node_js
