@@ -101,9 +101,8 @@ module.exports = function(grunt) {
     $.verbose.ok('Task options');
     $.verbose.writeln(JSON.stringify(options));
 
-    var runner = require('../lib/selenium')(grunt),
-        doneCallback = this.async();
+    var runner = require('../lib/runner')(grunt);
 
-    runner(group, options, settings, doneCallback);
+    runner(group, options, settings, this.async());
   });
 };
