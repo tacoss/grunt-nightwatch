@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
   grunt.registerTask('nightwatch', 'Run your Nightwatch.js tests', function() {
     var $ = require('../lib/functions')(grunt),
@@ -66,7 +68,9 @@ module.exports = function(grunt) {
     }
 
     // create test_settings group if missing
-    _.isObject(settings.test_settings) || (settings.test_settings = {});
+    if (!_.isObject(settings.test_settings)) {
+      settings.test_settings = {};
+    }
 
     // extend default test_settings using task/options
     $.mergeVars(
@@ -79,7 +83,9 @@ module.exports = function(grunt) {
 
     // load the target options with the global and target defaults
     _.each(group, function (name) {
-      _.isObject(settings.test_settings[name]) || (settings.test_settings[name] = {});
+      if (!_.isObject(settings.test_settings[name])) {
+        settings.test_settings[name] = {};
+      }
 
       // override task-options in order
       $.mergeVars(

@@ -1,0 +1,13 @@
+{
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "rules": {
+    "quotes": [1, "single", "avoid-escape"],
+    "global-strict": [1, "always"],
+    "no-underscore-dangle": false,
+    "no-extra-strict": true,
+    "camelcase": false
+  }
+}

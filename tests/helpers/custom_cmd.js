@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports.command = function(value) {
   var self  = this;
 
