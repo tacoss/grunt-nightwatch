@@ -87,20 +87,20 @@ module.exports = function(grunt) {
         settings.test_settings[name] = {};
       }
 
-      // override task-options in order
+      // override task-options (top -> bottom)
       $.mergeVars(
         options,
-        _.pick(config.options[name] || {}, fake_opts),
+        _.pick(config[name] || {}, fake_opts),
         _.pick(config.options || {}, fake_opts),
-        _.pick(config[name] || {}, fake_opts)
+        _.pick(config.options[name] || {}, fake_opts)
       );
 
       $.mergeVars(
         settings.test_settings[name],
         settings.test_settings['default'],
-        _.pick(config.options[name] || {}, settings_opts),
+        _.pick(config[name] || {}, settings_opts),
         _.pick(config.options || {}, settings_opts),
-        _.pick(config[name] || {}, settings_opts)
+        _.pick(config.options[name] || {}, settings_opts)
       );
     });
 
