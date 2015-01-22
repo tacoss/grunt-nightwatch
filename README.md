@@ -1,5 +1,7 @@
 # Grunt meets Nightwatch.js
 
+[![Build Status](https://travis-ci.org/gextech/grunt-nightwatch.png?branch=master)](https://travis-ci.org/gextech/grunt-nightwatch) [![NPM version](https://badge.fury.io/js/grunt-nightwatch.png)](http://badge.fury.io/js/grunt-nightwatch)
+
 Automatize your tests:
 
 ```javascript
@@ -84,6 +86,16 @@ Since `0.3.0` the **settings** property was deprecated.
 }
 ```
 
+## CLI options
+
+Currently, `grunt-nightwatch` supports:
+
+- **`--tag`**, **`--test`**, **`--filter`**, **`--group`**, **`--skipgroup`**
+
+  All of these are appended to the child process that runs `nightwatch` on the background.
+
+Since `0.3.2` you can pass all of these options.
+
 ## Targets
 
 All options are the same as the main settings.
@@ -97,9 +109,3 @@ nightwatch: {
 Now you can execute `grunt nightwatch:demo` to run your tests.
 
 Note that your tests must be grouped together as follows: `tests/<group>/test.js`
-
-Since `0.3.0` you can run multiple targets at once but not in the same flavor as  [Nightwatch does](https://github.com/beatfactor/nightwatch/blob/master/bin/_clirunner.js).
-
-## Build status
-
-[![Build Status](https://travis-ci.org/gextech/grunt-nightwatch.png?branch=master)](https://travis-ci.org/gextech/grunt-nightwatch)
