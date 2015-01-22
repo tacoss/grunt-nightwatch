@@ -12,8 +12,8 @@ module.exports = (grunt) ->
         chrome:
           desiredCapabilities:
             browserName: 'chrome'
-      saucelabs:
-        standalone: false
+        saucelabs:
+          standalone: false
       local:
         jar_path: __dirname + '/selenium-server-standalone-2.42.2.jar'
       cli:
