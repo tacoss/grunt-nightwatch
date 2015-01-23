@@ -88,13 +88,11 @@ Since `0.3.0` the **settings** property was deprecated.
 
 ## CLI options
 
-Currently, `grunt-nightwatch` supports:
+Since `0.4.0`, `grunt-nightwatch` supports:
 
 - **`--tag`**, **`--test`**, **`--filter`**, **`--group`**, **`--skipgroup`**
 
-  All of these are appended to the child process that runs `nightwatch` on the background.
-
-Since `0.3.2` you can pass all of these options.
+  All of these are passed to the child process that runs `nightwatch` on the [background](lib/background.js).
 
 ## Targets
 
