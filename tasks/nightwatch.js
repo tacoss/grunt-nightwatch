@@ -12,6 +12,7 @@ module.exports = function(grunt) {
       jar_path: null,
       jar_version: '2.44.0',
       standalone: false,
+      config_path: null,
       // nightwatch-settings
       src_folders: ['tests'],
       output_folder: 'reports',
@@ -30,7 +31,8 @@ module.exports = function(grunt) {
     var fake_opts = [
       'standalone', 'jar_path', 'jar_url', 'jar_version',
       'chrome_driver_path',
-      'ie_driver_path'
+      'ie_driver_path',
+      'config_path'
     ];
 
     var settings_opts = [
@@ -103,6 +105,16 @@ module.exports = function(grunt) {
         _.pick(config.options || {}, settings_opts),
         _.pick(config.options[name] || {}, settings_opts)
       );
+
+      // load settings/options from custom .json file
+      if ($.exists(options.config_path)) {
+        var data = $.json(options.config_path);
+
+        $.verbose.ok('Custom JSON-file: ' + options.config_path);
+
+        $.mergeVars(options, _.pick(data, fake_opts));
+        $.mergeVars(settings.test_settings[name], _.pick(data, settings_opts));
+      }
     });
 
     $.verbose.ok('Task options');
