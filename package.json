@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "name": "grunt-nightwatch",
   "description": "Run your Nightwatch.js tests with Grunt",
   "repository": {
@@ -29,5 +29,8 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-parts": "^0.3.1"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
   }
 }
