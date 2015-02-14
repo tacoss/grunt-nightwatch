@@ -8,8 +8,9 @@ module.exports = function(grunt) {
     var config = grunt.config.get('nightwatch');
 
     var defaults = {
-      jar_url: 'http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar',
+      jar_url: 'http://selenium-release.storage.googleapis.com/{x}.{y}/selenium-server-standalone-{x}.{y}.{z}.jar',
       jar_path: null,
+      jar_version: '2.44.0',
       standalone: false,
       // nightwatch-settings
       src_folders: ['tests'],
@@ -27,7 +28,7 @@ module.exports = function(grunt) {
         deprecated_settings_json = $.cwd('settings.json');
 
     var fake_opts = [
-      'standalone', 'jar_path', 'jar_url',
+      'standalone', 'jar_path', 'jar_url', 'jar_version',
       'chrome_driver_path',
       'ie_driver_path'
     ];
