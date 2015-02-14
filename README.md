@@ -58,9 +58,17 @@ Currently, `grunt-nightwatch` supports:
   - If **jar_path** option exists then use it
   - If not, it will download from **jar_url** option
 
+- **jar_version** (string)
+
+  Used for fixing the **jar_url** if it has the following format like: `http://selenium-release.storage.googleapis.com/{x}.{y}/selenium-server-standalone-{x}.{y}.{z}.jar`, where `x.y.z` is the custom version.
+
 - **jar_path** (string) - see above
 
 - **jar_url** (string)  - see above
+
+- **config_path** (string)
+
+  Set a custom path for JSON settings and options, it can be overriden per target.
 
 Note that the **nighwatch.json** file settings is fully supported, but your task options will override them if needed.
 
@@ -73,8 +81,10 @@ Since `0.3.0` the **settings** property was deprecated.
 ```javascript
 {
   standalone: true,
+  config_path: '/path/to/file.json',
+  jar_version: '2.44.0',
   jar_path: '/opt/selenium/server.jar',
-  jar_url: 'http://domain.com/files/selenium-server-standalone-2.40.0.jar',
+  jar_url: 'http://domain.com/files/selenium-server-standalone-1.2.3.jar',
   globals: { foo: 'bar' },
   globals_path: 'custom_tests/globals',
   custom_commands_path: 'custom_tests/helpers',
@@ -107,3 +117,4 @@ nightwatch: {
 Now you can execute `grunt nightwatch:demo` to run your tests.
 
 Note that your tests must be grouped together as follows: `tests/<group>/test.js`
+
