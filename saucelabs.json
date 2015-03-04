@@ -6,8 +6,8 @@
       "selenium_port": 4445,
       "custom_commands_path": "helpers",
       "desiredCapabilities": {
-        "username": "${SAUCE_USERNAME}",
-        "accessKey": "${SAUCE_ACCESS_KEY}"
+        "username": "${_SAUCE_USERNAME}",
+        "accessKey": "${_SAUCE_ACCESS_KEY}"
       }
     }
   }
