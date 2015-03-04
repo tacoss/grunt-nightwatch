@@ -1,5 +1,4 @@
 {
-  "standalone": false,
   "test_settings": {
     "saucelabs": {
       "silent": true,
