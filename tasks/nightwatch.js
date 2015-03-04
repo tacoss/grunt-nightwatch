@@ -7,6 +7,10 @@ module.exports = function(grunt) {
 
     var config = grunt.config.get('nightwatch');
 
+    if (!config.options) {
+      config.options = {};
+    }
+
     var defaults = {
       jar_url: 'http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar',
       jar_path: null,
@@ -29,7 +33,8 @@ module.exports = function(grunt) {
     var fake_opts = [
       'standalone', 'jar_path', 'jar_url',
       'chrome_driver_path',
-      'ie_driver_path'
+      'ie_driver_path',
+      'config_path'
     ];
 
     var settings_opts = [
@@ -67,6 +72,16 @@ module.exports = function(grunt) {
       $.log.error('Deprecated property "settings" will not be merged');
     }
 
+    // load settings/options from custom .json file
+    if ($.exists(options.config_path)) {
+      var data = $.json(options.config_path);
+
+      $.verbose.ok('Custom JSON-file: ' + options.config_path);
+
+      $.mergeVars(settings, _.pick(data, settings_opts));
+      $.mergeVars(options, _.pick(data, fake_opts));
+    }
+
     // create test_settings group if missing
     if (!_.isObject(settings.test_settings)) {
       settings.test_settings = {};
@@ -75,7 +90,6 @@ module.exports = function(grunt) {
     // extend default test_settings using task/options
     $.mergeVars(
       settings.test_settings['default'],
-      _.omit(_.pick(settings || {}, settings_opts), 'test_settings'),
       _.pick(config.options['default'] || {}, settings_opts),
       _.pick(config['default'] || {}, settings_opts),
       _.pick(config || {}, settings_opts)
