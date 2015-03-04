@@ -118,16 +118,6 @@ module.exports = function(grunt) {
         _.pick(config.options || {}, settings_opts),
         _.pick(config.options[name] || {}, settings_opts)
       );
-
-      // load settings/options from custom .json file
-      if ($.exists(options.config_path)) {
-        var data = $.json(options.config_path);
-
-        $.verbose.ok('Custom JSON-file: ' + options.config_path);
-
-        $.mergeVars(options, _.pick(data, fake_opts));
-        $.mergeVars(settings.test_settings[name], _.pick(data, settings_opts));
-      }
     });
 
     $.verbose.ok('Task options');
