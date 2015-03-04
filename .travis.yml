@@ -13,4 +13,4 @@ node_js:
 before_script:
 - npm install -g grunt-cli
 script:
-- grunt nightwatch:saucelabs --verbose
+- grunt nightwatch:saucelabs
