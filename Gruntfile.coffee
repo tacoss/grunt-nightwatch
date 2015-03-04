@@ -14,6 +14,7 @@ module.exports = (grunt) ->
             browserName: 'chrome'
         saucelabs:
           standalone: false
+          config_path: __dirname + '/saucelabs.json'
       local:
         jar_path: __dirname + '/selenium-server-standalone-2.42.2.jar'
       cli:
