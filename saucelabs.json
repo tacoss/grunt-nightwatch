@@ -2,12 +2,13 @@
   "test_settings": {
     "saucelabs": {
       "silent": true,
+      "standalone": false,
       "selenium_host": "localhost",
       "selenium_port": 4445,
       "custom_commands_path": "helpers",
       "desiredCapabilities": {
-        "username": "${_SAUCE_USERNAME}",
-        "accessKey": "${_SAUCE_ACCESS_KEY}"
+        "username": "${SAUCE_USERNAME}",
+        "accessKey": "${SAUCE_ACCESS_KEY}"
       }
     }
   }
