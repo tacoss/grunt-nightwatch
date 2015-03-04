@@ -1,8 +1,8 @@
 {
+  "standalone": false,
   "test_settings": {
     "saucelabs": {
       "silent": true,
-      "standalone": false,
       "selenium_host": "localhost",
       "selenium_port": 4445,
       "custom_commands_path": "helpers",
