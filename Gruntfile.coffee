@@ -3,8 +3,8 @@ module.exports = (grunt) ->
     nightwatch:
       options:
         standalone: true
-        src_folders: 'tests/env'
-        custom_commands_path: 'tests/helpers'
+        src_folders: 'test/env'
+        custom_commands_path: 'test/helpers'
         chrome_driver_path: __dirname + '/chromedriver'
         firefox:
           desiredCapabilities:
