@@ -17,8 +17,6 @@ module.exports = (grunt) ->
         standalone: false
       local:
         jar_path: __dirname + '/selenium-server-standalone-2.42.2.jar'
-      cli:
-        standalone: false
 
   grunt.loadTasks 'tasks'
   grunt.loadNpmTasks 'grunt-parts'
