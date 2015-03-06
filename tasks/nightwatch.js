@@ -86,6 +86,16 @@ module.exports = function(grunt) {
 
       $.mergeVars(settings, _.pick(data, settings_opts));
       $.mergeVars(options, _.pick(data, fake_opts));
+
+      _.each(_.pick(settings, paths), function (value, key) {
+        if (_.isArray(settings[key])) {
+          settings[key] = _.map(settings[key], function(folder) {
+            return $.resolvePath(options.config_path, folder);
+          });
+        } else {
+          settings[key] = $.resolvePath(options.config_path, value);
+        };
+      });
     }
 
     // create test_settings group if missing
@@ -122,17 +132,6 @@ module.exports = function(grunt) {
         _.pick(config.options || {}, settings_opts),
         _.pick(config.options[name] || {}, settings_opts)
       );
-
-      _.each(_.pick(settings, paths), function (value, key) {
-        if (_.isArray(settings[key])) {
-          settings[key] = _.map(settings[key], function(folder) {
-            return $.resolvePath(options.config_path, folder);
-          });
-        } else {
-          settings[key] = $.resolvePath(options.config_path, value);
-        };
-      });
-
     });
 
     $.verbose.ok('Task options');
