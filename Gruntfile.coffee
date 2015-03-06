@@ -5,13 +5,11 @@ module.exports = (grunt) ->
         src_folders: 'test/env'
         custom_commands_path: 'test/helpers'
         chrome_driver_path: __dirname + '/chromedriver'
-        config_path: __dirname + '/saucelabs.json'
+        config_path: grunt.cli.options.settings if grunt.cli.options.settings
       chrome:
         standalone: true
         desiredCapabilities:
           browserName: 'chrome'
-      local:
-        jar_path: __dirname + '/selenium-server-standalone-2.42.2.jar'
 
   grunt.loadTasks 'tasks'
   grunt.loadNpmTasks 'grunt-parts'
