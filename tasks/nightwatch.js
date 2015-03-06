@@ -48,6 +48,10 @@ module.exports = function(grunt) {
       'filter', 'use_xpath'
     ];
 
+    var paths = [
+      'globals', 'src_folders', 'output_folder', 'globals_path', 'custom_commands_path', 'custom_assertions_path'
+    ];
+
     if ($.exists(deprecated_settings_json)) {
       $.log.error('Deprecated settings.json will not be merged (use nightwatch.json)');
     }
@@ -118,6 +122,17 @@ module.exports = function(grunt) {
         _.pick(config.options || {}, settings_opts),
         _.pick(config.options[name] || {}, settings_opts)
       );
+
+      _.each(_.pick(settings, paths), function (value, key) {
+        if (_.isArray(settings[key])) {
+          settings[key] = _.map(settings[key], function(folder) {
+            return $.resolvePath(options.config_path, folder);
+          });
+        } else {
+          settings[key] = $.resolvePath(options.config_path, value);
+        };
+      });
+
     });
 
     $.verbose.ok('Task options');
