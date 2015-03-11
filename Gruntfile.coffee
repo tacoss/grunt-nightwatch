@@ -3,13 +3,18 @@ module.exports = (grunt) ->
     nightwatch:
       options:
         src_folders: 'test/env'
+        screenshots:
+          path: 'test/screenshots'
         custom_commands_path: 'test/helpers'
         chrome_driver_path: __dirname + '/chromedriver'
         config_path: grunt.cli.options.settings if grunt.cli.options.settings
-      chrome:
-        standalone: true
+      default:
+        standalone: grunt.cli.options.standalone is on
         desiredCapabilities:
-          browserName: 'chrome'
+          browserName: if typeof grunt.cli.options.browser is 'string'
+            grunt.cli.options.browser
+          else
+            'firefox'
 
   grunt.loadTasks 'tasks'
   grunt.loadNpmTasks 'grunt-parts'
