@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     ];
 
     var paths = [
-      'globals', 'src_folders', 'output_folder', 'globals_path', 'custom_commands_path', 'custom_assertions_path'
+      'path', 'globals', 'src_folders', 'output_folder', 'globals_path', 'custom_commands_path', 'custom_assertions_path'
     ];
 
     if ($.exists(deprecated_settings_json)) {
@@ -87,15 +87,7 @@ module.exports = function(grunt) {
       $.mergeVars(settings, _.pick(data, settings_opts));
       $.mergeVars(options, _.pick(data, fake_opts));
 
-      _.each(_.pick(settings, paths), function (value, key) {
-        if (_.isArray(settings[key])) {
-          settings[key] = _.map(settings[key], function(folder) {
-            return $.resolvePath(options.config_path, folder);
-          });
-        } else {
-          settings[key] = $.resolvePath(options.config_path, value);
-        };
-      });
+      $.expandPaths(options.config_path, settings, paths);
     }
 
     // create test_settings group if missing
