@@ -9,5 +9,5 @@ chromedriver
 /node_modules
 /reports
 /helpers
-/tests
+/test
 /tests_output
