@@ -51,7 +51,7 @@ module.exports = function(grunt) {
     var paths = [
       'src_folders', 'output_folder', 'globals_path', 'custom_commands_path', 'custom_assertions_path',
       'path', 'server_path', 'log_path', 'webdriver.chrome.driver', 'webdriver.ie.driver',
-      'webdriver.firefox.profile', 'exclude', 'filter'
+      'webdriver.firefox.profile', 'phantomjs.binary.path', 'exclude', 'filter'
     ];
 
     if ($.exists(deprecated_settings_json)) {
