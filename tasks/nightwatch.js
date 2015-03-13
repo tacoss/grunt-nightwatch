@@ -34,8 +34,6 @@ module.exports = function(grunt) {
 
     var fake_opts = [
       'standalone', 'jar_path', 'jar_url', 'jar_version',
-      'chrome_driver_path',
-      'ie_driver_path',
       'config_path'
     ];
 
