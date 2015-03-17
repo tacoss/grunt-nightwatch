@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     var defaults = {
       jar_url: 'http://selenium-release.storage.googleapis.com/{x}.{y}/selenium-server-standalone-{x}.{y}.{z}.jar',
       jar_path: null,
-      jar_version: '2.44.0',
+      jar_version: '2.45.0',
       standalone: false,
       config_path: null,
       // nightwatch-settings
