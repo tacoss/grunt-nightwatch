@@ -24,6 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "byline": "^4.2.1",
     "nightwatch": "^0.5.36"
   },
   "devDependencies": {
