@@ -47,7 +47,7 @@ $ grunt nightwatch:A:B  # targets: A, B
 
 Currently, `grunt-nightwatch` supports:
 
-- **globals**, **selenium**, **src_folders**, **output_folder**, **globals_path**, **custom_commands_path**, **custom_assertions_path**, **test_settings**, **launch_url**, **selenium_host**, **selenium_port**, **silent**, **output**, **disable_colors**, **screenshots**, **username**, **access_key**, **desiredCapabilities**, **exclude**, **filter**, **use_xpath**
+- **globals**, **selenium**, **src_folders**, **output_folder**, **globals_path**, **custom_commands_path**, **custom_assertions_path**, **test_settings**, **launch_url**, **selenium_host**, **selenium_port**, **silent**, **output**, **disable_colors**, **screenshots**, **username**, **access_key**, **desiredCapabilities**, **exclude**, **filter**, **use_xpath**, **page_objects_path**
 
   All of these options are fully supported and will be merged from **task** to **target** settings (including the **default** target).
 
