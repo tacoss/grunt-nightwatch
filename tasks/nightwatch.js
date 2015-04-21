@@ -79,15 +79,16 @@ module.exports = function(grunt) {
     }
 
     // load settings/options from custom .json file
-    if ($.exists(options.config_path)) {
-      var data = $.json(options.config_path);
+    if (options.config_path) {
+      var file  = $.resolve(options.config_path),
+          data = $.json(file);
 
-      $.verbose.ok('Custom JSON-file: ' + options.config_path);
+      $.verbose.ok('Custom JSON-file: ' + file);
 
       $.mergeVars(settings, _.pick(data, settings_opts));
       $.mergeVars(options, _.pick(data, fake_opts));
 
-      $.expandPaths(options.config_path, settings, paths);
+      $.expandPaths(file, settings, paths);
     }
 
     // create test_settings group if missing
