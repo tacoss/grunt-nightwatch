@@ -119,9 +119,9 @@ module.exports = function(grunt) {
     // extend default test_settings using task/options
     $.mergeVars(
       settings.test_settings['default'],
-      _.pick(config.options['default'] || {}, settings_opts),
+      _.pick(config || {}, settings_opts),
       _.pick(config['default'] || {}, settings_opts),
-      _.pick(config || {}, settings_opts)
+      _.pick(config.options['default'] || {}, settings_opts)
     );
 
     // load the target options with the global and target defaults
