@@ -140,7 +140,6 @@ module.exports = function(grunt) {
 
       $.mergeVars(
         settings.test_settings[name],
-        settings.test_settings['default'],
         _.pick(config[name] || {}, settings_opts),
         _.pick(config.options || {}, settings_opts),
         _.pick(config.options[name] || {}, settings_opts)
