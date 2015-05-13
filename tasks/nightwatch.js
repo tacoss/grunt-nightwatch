@@ -91,6 +91,26 @@ module.exports = function(grunt) {
       $.expandPaths(file, settings, paths);
     }
 
+    // load settings/options from custom .json files in targets
+    _.each(group, function (name) {
+      var pathOptions = $.mergeVars(
+        {},
+        _.pick(config[name] || {}, 'config_path'),
+        _.pick(config.options[name] || {}, 'config_path')
+      );
+
+      if (pathOptions.config_path) {
+        var file  = $.resolve(pathOptions.config_path),
+            data = $.json(file);
+
+        $.verbose.ok('Target custom JSON-file: ' + file);
+        $.mergeVars(settings, _.pick(data, settings_opts));
+        $.mergeVars(options, _.pick(data, fake_opts));
+
+        $.expandPaths(file, settings, paths);
+      }
+    });
+
     // create test_settings group if missing
     if (!_.isObject(settings.test_settings)) {
       settings.test_settings = {};
