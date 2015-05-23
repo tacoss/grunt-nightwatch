@@ -33,8 +33,7 @@ module.exports = function(grunt) {
         deprecated_settings_json = $.cwd('settings.json');
 
     var fake_opts = [
-      'standalone', 'jar_path', 'jar_url', 'jar_version',
-      'config_path'
+      'standalone', 'jar_path', 'jar_url', 'jar_version', 'config_path'
     ];
 
     var settings_opts = [
@@ -126,10 +125,6 @@ module.exports = function(grunt) {
 
     // load the target options with the global and target defaults
     _.each(group, function (name) {
-      if (!_.isObject(settings.test_settings[name])) {
-        settings.test_settings[name] = {};
-      }
-
       // override task-options (top -> bottom)
       $.mergeVars(
         options,
@@ -138,12 +133,14 @@ module.exports = function(grunt) {
         _.pick(config.options[name] || {}, fake_opts)
       );
 
-      $.mergeVars(
-        settings.test_settings[name],
-        _.pick(config[name] || {}, settings_opts),
-        _.pick(config.options || {}, settings_opts),
-        _.pick(config.options[name] || {}, settings_opts)
-      );
+      if (_.isObject(settings.test_settings[name])) {
+        $.mergeVars(
+          settings.test_settings[name],
+          _.pick(config[name] || {}, settings_opts),
+          _.pick(config.options || {}, settings_opts),
+          _.pick(config.options[name] || {}, settings_opts)
+        );
+      }
     });
 
     $.verbose.ok('Task options');
