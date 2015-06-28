@@ -12,6 +12,12 @@ module.exports = function(grunt) {
     var config = options.options,
         tests = _.omit(options, 'options');
 
+    var args = Array.prototype.slice.call(arguments);
+
+    if (args.length) {
+      config.target = args;
+    }
+
     config.test_settings = tests;
 
     nwrun(config, function(err) {
