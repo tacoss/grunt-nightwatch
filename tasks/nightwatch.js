@@ -20,8 +20,6 @@ module.exports = function(grunt) {
 
     config.test_settings = tests;
 
-    nwrun(config, function(err) {
-      done(err > 0 ? false : null);
-    });
+    nwrun(config, done);
   });
 };
