@@ -47,25 +47,6 @@ $ grunt nightwatch:A:B  # targets: A, B
 
 Currently, `grunt-nightwatch` supports the same options as [nwrun](https://github.com/gextech/nwrun) can handle.
 
-- **standalone** (boolean)
-
-  If enabled, there are two scenarios:
-
-  - If **jar_path** option exists then use it
-  - If not, it will download from **jar_url** option
-
-- **jar_version** (string)
-
-  Used for fixing the **jar_url** if it has the following format like: `http://selenium-release.storage.googleapis.com/{x}.{y}/selenium-server-standalone-{x}.{y}.{z}.jar`, where `x.y.z` is the custom version.
-
-- **jar_path** (string) - see above
-
-- **jar_url** (string)  - see above
-
-- **config_path** (string)
-
-  Set a custom path for JSON settings and options, it can be overriden per target.
-
 Note that the **nighwatch.json** file settings is fully supported, but your task options will override them if needed.
 
 ### Gruntfile.js
