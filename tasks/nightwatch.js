@@ -18,6 +18,7 @@ module.exports = function(grunt) {
       config.target = args;
     }
 
+    config.argv =  grunt.cli.options;
     config.test_settings = tests;
 
     nwrun(config, done);
