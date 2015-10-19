@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "nwrun": ">=0.0.11"
+    "nwrun": ">=0.0.13"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

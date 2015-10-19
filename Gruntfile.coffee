@@ -6,7 +6,7 @@ module.exports = (grunt) ->
         src_folders: 'test/env'
         custom_commands_path: 'test/helpers'
         chrome_driver_path: __dirname + '/chromedriver'
-      override:
+      saucelabs:
         config_path: grunt.cli.options.settings if grunt.cli.options.settings
       default:
         desiredCapabilities:

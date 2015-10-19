@@ -4,7 +4,7 @@
       "silent": true,
       "selenium_host": "localhost",
       "selenium_port": 4445,
-      "custom_commands_path": "helpers",
+      "custom_commands_path": "test/helpers",
       "desiredCapabilities": {
         "username": "${SAUCE_USERNAME}",
         "accessKey": "${SAUCE_ACCESS_KEY}"

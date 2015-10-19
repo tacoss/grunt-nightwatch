@@ -12,4 +12,4 @@ node_js:
 before_script:
 - npm install -g grunt-cli
 script:
-- grunt nightwatch:override:saucelabs --settings saucelabs.json
+- grunt nightwatch:saucelabs --settings saucelabs.json
