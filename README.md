@@ -45,11 +45,7 @@ $ grunt nightwatch:A:B  # targets: A, B
 
 ## Options
 
-Currently, `grunt-nightwatch` supports:
-
-- **globals**, **selenium**, **src_folders**, **output_folder**, **globals_path**, **custom_commands_path**, **custom_assertions_path**, **test_settings**, **launch_url**, **selenium_host**, **selenium_port**, **silent**, **output**, **disable_colors**, **screenshots**, **username**, **access_key**, **desiredCapabilities**, **exclude**, **filter**, **use_xpath**, **page_objects_path**
-
-  All of these options are fully supported and will be merged from **task** to **target** settings (including the **default** target).
+Currently, `grunt-nightwatch` supports the same options as [nwrun](https://github.com/gextech/nwrun) can handle.
 
 - **standalone** (boolean)
 
@@ -72,37 +68,51 @@ Currently, `grunt-nightwatch` supports:
 
 Note that the **nighwatch.json** file settings is fully supported, but your task options will override them if needed.
 
-Since `0.2.3` the  **settings.json** file was deprecated.
-
-Since `0.3.0` the **settings** property was deprecated.
-
-### Example options
-
+### Gruntfile.js
 ```javascript
-{
-  standalone: true,
-  config_path: '/path/to/file.json',
-  jar_version: '2.44.0',
-  jar_path: '/opt/selenium/server.jar',
-  jar_url: 'http://domain.com/files/selenium-server-standalone-1.2.3.jar',
-  globals: { foo: 'bar' },
-  globals_path: 'custom_tests/globals',
-  custom_commands_path: 'custom_tests/helpers',
-  custom_assertions_path: 'custom_tests/asserts',
-  src_folders: ['custom_tests/nightwatch'],
-  output_folder: 'report',
-  test_settings: {},
-  selenium: {}
-}
+module.exports = function(grunt) {
+  grunt.initConfig({
+    nightwatch: {
+      options: {
+        // task options
+        standalone: true,
+
+        // download settings
+        jar_version: '2.44.0',
+        jar_path: '/opt/selenium/server.jar',
+        jar_url: 'http://domain.com/files/selenium-server-standalone-1.2.3.jar',
+
+        // nightwatch settings
+        globals: { foo: 'bar' },
+        globals_path: 'custom_tests/globals',
+        custom_commands_path: 'custom_tests/helpers',
+        custom_assertions_path: 'custom_tests/asserts',
+        src_folders: ['custom_tests/nightwatch'],
+        output_folder: 'report',
+        test_settings: {},
+        selenium: {}
+      },
+      custom: {
+        // custom target + overrides
+        config_path: '/path/to/file.json',
+        src_folders: ['other_tests/nightwatch']
+      }
+    }
+  });
+};
 ```
 
 ## CLI options
 
-Since `0.4.0`, `grunt-nightwatch` supports:
+Since `0.5.0`, `grunt-nightwatch` will pass `grunt.cli.options` as the `argv` option to `nwrun`.
 
-- **`--tag`**, **`--test`**, **`--filter`**, **`--group`**, **`--skipgroup`**
+This means you can use `grunt nightwatch:A:B --group foo --tag bar` directly on the CLI.
 
-  All of these are passed to the child process that runs `nightwatch` on the [background](lib/background.js).
+### Know issues
+
+When running in parallel Nightwatch will copy the `process.argv` and it may produce bugs if you expect a single boolean argument like `grunt nightwatch:A:B --standalone`.
+
+It will spawn `grunt nightwatch --standalone --env A` and the argv will be erroneously parsed as `--standalone=--env`.
 
 ## Targets
 
@@ -117,4 +127,3 @@ nightwatch: {
 Now you can execute `grunt nightwatch:demo` to run your tests.
 
 Note that your tests must be grouped together as follows: `tests/<group>/test.js`
-
