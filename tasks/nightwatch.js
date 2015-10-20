@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     var done = this.async();
     var options = grunt.config.get('nightwatch');
 
-    var config = options.options,
+    var config = options.options || {},
         tests = _.omit(options, 'options');
 
     var args = Array.prototype.slice.call(arguments);
