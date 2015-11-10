@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     }
 
     config.argv =  grunt.cli.options;
-    config.test_settings = tests;
+    config.test_settings = _.merge(config.test_settings, tests);
 
     nwrun(config, done);
   });
