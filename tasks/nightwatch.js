@@ -13,10 +13,11 @@ module.exports = function(grunt) {
     var args = Array.prototype.slice.call(arguments);
 
     if (args.length) {
-      config.target = args;
+      config.target = config.target || [];
+      Array.prototype.push.apply(config.target, args);
     }
 
-    config.argv =  grunt.cli.options;
+    config.argv = config.argv || grunt.cli.options;
     config.test_settings = _.merge(config.test_settings || {}, tests);
 
     nwrun(config, done);
