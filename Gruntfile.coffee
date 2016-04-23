@@ -9,4 +9,3 @@ module.exports = (grunt) ->
         config_path: grunt.cli.options.settings if grunt.cli.options.settings
 
   grunt.loadTasks 'tasks'
-  grunt.loadNpmTasks 'grunt-parts'

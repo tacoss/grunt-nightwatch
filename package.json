@@ -30,7 +30,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "nwrun": ">=0.0.13"
+    "nwrun": ">=0.0.16"
   },
   "devDependencies": {
     "eslint": "^2.6.0",
