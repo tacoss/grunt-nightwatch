@@ -1,5 +1,5 @@
 module.exports = (grunt) ->
-  grunt.initConfig
+  settings =
     nightwatch:
       options:
         standalone: grunt.cli.options.standalone is on
@@ -8,4 +8,14 @@ module.exports = (grunt) ->
       saucelabs:
         config_path: grunt.cli.options.settings if grunt.cli.options.settings
 
+  if grunt.cli.options.chrome
+    settings.nightwatch.options.selenium =
+      cli_args:
+        'webdriver.chrome.driver': require('chromedriver').path
+
+    settings.nightwatch['default'] =
+      desiredCapabilities:
+        browserName: 'chrome'
+
+  grunt.initConfig settings
   grunt.loadTasks 'tasks'

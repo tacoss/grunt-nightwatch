@@ -33,6 +33,7 @@
     "nwrun": ">=0.0.16"
   },
   "devDependencies": {
+    "chromedriver": "^2.21.2",
     "eslint": "^2.6.0",
     "grunt": "^1.0.1"
   }
