@@ -2,6 +2,9 @@
   "version": "0.5.2",
   "name": "grunt-nightwatch",
   "description": "Run your Nightwatch.js tests with Grunt",
+  "scripts": {
+    "dev:lint": "eslint tasks test"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gextech/grunt-nightwatch.git"
@@ -22,15 +25,14 @@
     "name": "Alvaro Cabrera",
     "email": "pateketrueke@gmail.com"
   },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
   "license": "MIT",
   "dependencies": {
     "nwrun": ">=0.0.13"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-parts": "^0.5.6"
-  },
-  "publishConfig": {
-    "registry": "http://registry.npmjs.org"
+    "eslint": "^2.6.0"
   }
 }

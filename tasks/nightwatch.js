@@ -1,5 +1,3 @@
-'use strict';
-
 var nwrun = require('nwrun');
 
 module.exports = function(grunt) {
