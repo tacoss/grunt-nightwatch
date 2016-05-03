@@ -30,11 +30,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "nwrun": ">=0.0.16"
+    "nwrun": ">=0.2.0"
   },
   "devDependencies": {
     "chromedriver": "^2.21.2",
     "eslint": "^2.6.0",
-    "grunt": "^1.0.1"
+    "grunt": "^1.0.1",
+    "nightwatch": "^0.8.18"
   }
 }
