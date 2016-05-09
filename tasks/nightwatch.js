@@ -18,6 +18,7 @@ module.exports = function(grunt) {
     }
 
     config.argv = config.argv || grunt.cli.options;
+    config.verbose = config.verbose || grunt.cli.options.verbose;
     config.test_settings = _.merge(config.test_settings || {}, tests);
 
     nwrun(config, done);
