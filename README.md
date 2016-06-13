@@ -89,7 +89,7 @@ Since `0.5.0`, `grunt-nightwatch` will pass `grunt.cli.options` as the `argv` op
 
 This means you can use `grunt nightwatch:A:B --group foo --tag bar` directly on the CLI.
 
-### Know issues
+### Known issues
 
 When running in parallel Nightwatch will copy the `process.argv` and it may produce bugs if you expect a single boolean argument like `grunt nightwatch:A:B --standalone`.
 
@@ -108,3 +108,42 @@ nightwatch: {
 Now you can execute `grunt nightwatch:demo` to run your tests.
 
 Note that your tests must be grouped together as follows: `tests/<group>/test.js`
+
+### Running tests with different browsers
+
+```javascript
+nightwatch: {
+      options: {
+          // task options
+          standalone: true,
+          // download settings
+          jar_version: '2.53.0',
+          jar_path: '../nightwatch/selenium-server-standalone-2.53.0.jar',
+          // jar_url: 'http://domain.com/files/selenium-server-standalone-1.2.3.jar',
+          src_folders: ['custom_tests/nightwatch'],
+          test_settings: {
+              phantom: {
+                  "desiredCapabilities": {
+                      "browserName": "phantomjs",
+                      "phantomjs.binary.path": "binaries/nightwatch/phantomjs.exe"
+                  }
+              },
+              firefox: {
+                  "desiredCapabilities": {
+                      "browserName": "firefox"
+                  }
+              },
+              chrome: {
+                  "desiredCapabilities": {
+                      "browserName": "chrome"
+                  },
+                  "cli_args" : {
+                      "webdriver.chrome.driver" : "binaries/nightwatch/chromedriver.exe"
+                  }
+              }
+          }
+      }
+  }
+  ```
+  
+  This configuration allows you to run your tests against different browsers by calling ```grunt nightwatch:chrome``` or ```grunt nightwatch:phantom``` etc.
